@@ -17,13 +17,11 @@ st.set_page_config(
 @st.cache_data
 def load_data():
     try:
-        df = pd.read_excel('Campaign Master@25.xlsx')
-        # Ensure required columns exist
-        required_columns = ['Date', 'Campaign', 'Lead_Status', 'Lead_Stage', 'Source', 'Region', 'Leads', 'Conversions', 'Revenue', 'Cost']
-        for col in required_columns:
-            if col not in df.columns:
-                st.error(f"Missing required column: {col}")
-                return pd.DataFrame(columns=required_columns)
+        df = pd.read_excel('Campaign Master@25.xlsx')  # Ensure this matches the file name
+        return df
+    except Exception as e:
+        st.error(f"Error loading Excel file: {str(e)}")
+        return pd.DataFrame()
         return df
     except Exception as e:
         st.error(f"Error loading Excel file: {str(e)}")
